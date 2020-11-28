@@ -6,7 +6,7 @@ module.exports = (app) => {
   // Create a new Student
   router.post("/register", teacher.createStudentAPI);
 
-  // router.get("/commonstudents", teacher.findCommonStudents);
+  router.get("/commonstudents", teacher.findCommonStudents);
 
   app.use("/api", router);
 };
