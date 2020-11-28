@@ -4,9 +4,9 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   // Create a new Student
-  router.post("/", teacher.createStudentAPI);
+  router.post("/register", teacher.createStudentAPI);
 
-  router.get("/", teacher.findCommonStudents);
+  // router.get("/commonstudents", teacher.findCommonStudents);
 
-  app.use("/api/students", router);
+  app.use("/api", router);
 };

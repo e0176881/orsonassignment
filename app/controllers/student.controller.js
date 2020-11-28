@@ -51,9 +51,6 @@ exports.findAll = () => {
         through: {
           attributes: [],
         },
-        // through: {
-        //   attributes: ["tag_id", "tutorial_id"],
-        // },
       },
     ],
   })

@@ -4,7 +4,7 @@ const Teacher = db.teacher;
 const StudentController = require("./student.controller");
 const TeacherController = require("./teacher.controller");
 
-exports.findCommonStudents = (req, res) => {
+/*exports.findCommonStudents = (req, res) => {
   if (!req.query) {
     res.status(400).send({
       message: "Content can not be empty!",
@@ -21,7 +21,7 @@ exports.findCommonStudents = (req, res) => {
         message: err.message,
       });
     });
-};
+}; */
 exports.createStudentAPI = (req, res) => {
   // Validate request
   if (!req.body) {
@@ -45,25 +45,26 @@ exports.createStudentAPI = (req, res) => {
             this.addStudent(teacherData.id, data.id)
               .then((data) => {
                 res.status(204).send();
-                // .send({
-                //   message:
-                //     err.message ||
-                //     "Some error occurred while creating the Teacher.",
-                // });
               })
               .catch((err) => {
                 res.status(500).send({
                   message: err.message,
                 });
               });
-            console.log(data);
+            //  console.log(data);
           })
           .catch((err) => {
+            res.status(500).send({
+              message: err.message,
+            });
             //create student fail
           });
       }
     })
     .catch((err) => {
+      res.status(500).send({
+        message: err.message,
+      });
       //teacher fail
     });
 };
