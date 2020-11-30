@@ -61,3 +61,27 @@ exports.findAll = () => {
       console.log(">> Error while retrieving Students: ", err);
     });
 };
+
+exports.suspendStudent = (req, res) => {
+  const email = req.body.student;
+  Student.update(
+    { suspended: true },
+    {
+      where: { email: email },
+    }
+  )
+    .then((num) => {
+      if (num == 1) {
+        res.status(204).send();
+      } else {
+        res.status(400).send({
+          message: "Student email : " + email + " not found  ",
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating student with email=" + email,
+      });
+    });
+};
