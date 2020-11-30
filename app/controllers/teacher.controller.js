@@ -12,22 +12,15 @@ exports.findCommonStudents = async (req, res) => {
     return;
   }
 
-  // check teacher email exist
-
-  //
-  // if (typeof req == "string") {
-  //   req = [req];
-  // }
-  //console.log("AAAAAAAAA" + JSON.stringify(req.query));
   try {
     var allStudents = [];
-    var object = Object.values(req.query).toString();
-    var objects = object.split(",");
-    console.log(object);
-    for (var i in objects) {
-      console.log(object[i]);
+    var teacher_email = Object.values(req.query).toString();
+    var teacher_emails = teacher_email.split(",");
+    console.log(teacher_email);
+    for (var i in teacher_emails) {
+      //console.log(object[i]);
       const data = await this.findByEmail(objects[i]);
-      console.log(data);
+      //console.log(data);
       for (var k in data.students) {
         //console.log(students[k].email);
         allStudents.push(data.students[k].email);
@@ -36,11 +29,11 @@ exports.findCommonStudents = async (req, res) => {
     }
 
     if (objects.length > 1) {
-      allStudents = getNotUnique(allStudents); //remove non unique students
-      //onsole.log(nonUniqueStudents);
+      allStudents = getNonUnique(allStudents); //remove unique students
+
       //remove duplicate students
     }
-    var commonStudents = allStudents.filter(onlyUnique);
+    var commonStudents = allStudents.filter(removeDuplicate);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -49,20 +42,11 @@ exports.findCommonStudents = async (req, res) => {
   });
 };
 
-function getNotUnique(array) {
-  var map = new Map();
-  array.forEach((a) => map.set(a, (map.get(a) || 0) + 1));
-  return array.filter((a) => map.get(a) > 1);
-}
-function onlyUnique(value, index, self) {
-  return self.indexOf(value) === index;
-}
-
 exports.suspendStudent = async (req, res) => {
   // Validate request
   if (!req.body) {
     res.status(400).send({
-      message: "Content can not be empty!",
+      message: "Content cannot be empty!",
     });
     return;
   }
@@ -71,14 +55,11 @@ exports.suspendStudent = async (req, res) => {
 exports.findCommonStudents = async (req, res) => {
   if (!req.query) {
     res.status(400).send({
-      message: "Content can not be empty!",
+      message: "Content cannot be empty!",
     });
     return;
   }
-  // if (typeof req == "string") {
-  //   req = [req];
-  // }
-  //console.log("AAAAAAAAA" + JSON.stringify(req.query));
+
   var allStudents = [];
   var object = Object.values(req.query).toString();
   var objects = object.split(",");
@@ -101,23 +82,23 @@ exports.findCommonStudents = async (req, res) => {
     console.log(allStudents);
   }
   if (objects.length > 1) {
-    allStudents = getNotUnique(allStudents); //remove non unique students
+    allStudents = getNonUnique(allStudents); //remove unique students
     //console.log(nonUniqueStudents);
     //remove duplicate students
   }
-  var commonStudents = allStudents.filter(onlyUnique);
+  var commonStudents = allStudents.filter(removeDuplicate);
 
   res.status(200).send({
     students: commonStudents,
   });
 };
 
-function getNotUnique(array) {
+function getNonUnique(array) {
   var map = new Map();
   array.forEach((a) => map.set(a, (map.get(a) || 0) + 1));
   return array.filter((a) => map.get(a) > 1);
 }
-function onlyUnique(value, index, self) {
+function removeDuplicate(value, index, self) {
   return self.indexOf(value) === index;
 }
 
@@ -125,7 +106,7 @@ exports.createStudentAPI = async (req, res) => {
   // Validate request
   if (!req.body) {
     res.status(400).send({
-      message: "Content can not be empty!",
+      message: "Content cannot be empty!",
     });
     return;
   }
@@ -134,10 +115,6 @@ exports.createStudentAPI = async (req, res) => {
     const teacherData = await this.findTeacher(req.body.teacher);
 
     for (var s in req.body.students) {
-      //  console.log(req.body.students[s]);
-      // check cannot empty email then
-      //check whether there is valid email
-
       const student = {
         email: req.body.students[s],
       };
@@ -166,7 +143,7 @@ exports.createStudentAPI = async (req, res) => {
     if (err.message.includes("UniqueConstraintError")) {
       message = "Student email already exist";
     } else {
-      message = err.message; //not sure of other error
+      message = err.message; //if other errors exist
     }
     res.status(400).send({
       message: message,

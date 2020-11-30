@@ -65,7 +65,7 @@ exports.findAll = () => {
 exports.suspendStudent = async (req, res) => {
   if (!req.query) {
     res.status(400).send({
-      message: "Content can not be empty!",
+      message: "Content cannot be empty!",
     });
     return;
   }
