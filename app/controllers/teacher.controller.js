@@ -11,31 +11,39 @@ exports.findCommonStudents = async (req, res) => {
     });
     return;
   }
+
+  // check teacher email exist
+
+  //
   // if (typeof req == "string") {
   //   req = [req];
   // }
   //console.log("AAAAAAAAA" + JSON.stringify(req.query));
-  var allStudents = [];
-  var object = Object.values(req.query).toString();
-  var objects = object.split(",");
-  console.log(object);
-  for (var i in objects) {
-    console.log(object[i]);
-    const data = await this.findByEmail(objects[i]);
-    console.log(data);
-    for (var k in data.students) {
-      //console.log(students[k].email);
-      allStudents.push(data.students[k].email);
+  try {
+    var allStudents = [];
+    var object = Object.values(req.query).toString();
+    var objects = object.split(",");
+    console.log(object);
+    for (var i in objects) {
+      console.log(object[i]);
+      const data = await this.findByEmail(objects[i]);
+      console.log(data);
+      for (var k in data.students) {
+        //console.log(students[k].email);
+        allStudents.push(data.students[k].email);
+      }
+      console.log(allStudents);
     }
-    console.log(allStudents);
-  }
-  if (objects.length > 1) {
-    allStudents = getNotUnique(allStudents); //remove non unique students
-    //onsole.log(nonUniqueStudents);
-    //remove duplicate students
-  }
-  var commonStudents = allStudents.filter(onlyUnique);
 
+    if (objects.length > 1) {
+      allStudents = getNotUnique(allStudents); //remove non unique students
+      //onsole.log(nonUniqueStudents);
+      //remove duplicate students
+    }
+    var commonStudents = allStudents.filter(onlyUnique);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
   res.status(200).send({
     students: commonStudents,
   });
@@ -78,6 +86,13 @@ exports.findCommonStudents = async (req, res) => {
   for (var i in objects) {
     console.log(object[i]);
     const data = await this.findByEmail(objects[i]);
+    //check if teacher email exist
+    if (!data) {
+      res.status(400).send({
+        message: "Teacher email does not exist",
+      });
+      return;
+    }
     console.log(data);
     for (var k in data.students) {
       //console.log(students[k].email);
@@ -87,7 +102,7 @@ exports.findCommonStudents = async (req, res) => {
   }
   if (objects.length > 1) {
     allStudents = getNotUnique(allStudents); //remove non unique students
-    //onsole.log(nonUniqueStudents);
+    //console.log(nonUniqueStudents);
     //remove duplicate students
   }
   var commonStudents = allStudents.filter(onlyUnique);
@@ -115,25 +130,49 @@ exports.createStudentAPI = async (req, res) => {
     return;
   }
 
-  const teacherData = await this.findTeacher(req.body.teacher).catch((e) => {
-    console.error(e.message);
-  });
+  try {
+    const teacherData = await this.findTeacher(req.body.teacher);
 
-  for (var s in req.body.students) {
-    // console.log(req.body.students[s]);
+    for (var s in req.body.students) {
+      //  console.log(req.body.students[s]);
+      // check cannot empty email then
+      //check whether there is valid email
 
-    const student = {
-      email: req.body.students[s],
-    };
+      const student = {
+        email: req.body.students[s],
+      };
 
-    const studentData = await StudentController.create(student).catch((e) => {
-      console.error(e.message);
+      //check if email is empty
+      if (!student.email) {
+        res.status(400).send({
+          message: "Student email cannot be empty",
+        });
+        return;
+      }
+
+      //check if email format is invalid
+      if (!validateEmail(student.email)) {
+        res.status(400).send({
+          message: "Email format invalid",
+        });
+        return;
+      }
+
+      const studentData = await StudentController.create(student);
+      await this.addStudent(teacherData.id, studentData.id);
+    }
+  } catch (err) {
+    var message = "";
+    if (err.message.includes("UniqueConstraintError")) {
+      message = "Student email already exist";
+    } else {
+      message = err.message; //not sure of other error
+    }
+    res.status(400).send({
+      message: message,
     });
-    await this.addStudent(teacherData.id, studentData.id).catch((e) => {
-      console.error(e.message);
-    });
-    res.status(204).send();
   }
+  res.status(204).send();
 };
 
 exports.create = (teacher) => {
@@ -155,7 +194,7 @@ exports.findAll = () => {
       {
         model: Student,
         as: "students",
-        attributes: ["id", "email"],
+        attributes: ["id", "email", "suspended"],
         through: {
           attributes: [],
         },
@@ -176,7 +215,7 @@ exports.findById = (id) => {
       {
         model: Student,
         as: "students",
-        attributes: ["id", "email"],
+        attributes: ["id", "email", "suspended"],
         through: {
           attributes: [],
         },
@@ -200,7 +239,7 @@ exports.findByEmail = (email) => {
       {
         model: Student,
         as: "students",
-        attributes: ["id", "email"],
+        attributes: ["id", "email", "suspended"],
         through: {
           attributes: [],
         },
@@ -236,6 +275,7 @@ exports.addStudent = (teacherId, studentId) => {
       });
     })
     .catch((err) => {
+      //  throw err;
       console.log(">> Error while adding Student to Teacher: ", err);
     });
 };
@@ -249,3 +289,8 @@ exports.findTeacher = (email) => {
       console.log(">> Error while finding Teacher: ", err);
     });
 };
+
+function validateEmail(email) {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}

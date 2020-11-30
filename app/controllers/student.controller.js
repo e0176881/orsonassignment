@@ -1,5 +1,4 @@
 const db = require("../models");
-const { create } = require("./teacher.controller");
 const Student = db.student;
 const Teacher = db.teacher;
 
@@ -38,6 +37,7 @@ exports.create = (student) => {
     })
     .catch((err) => {
       console.log(">> Error while creating Student: ", err);
+      throw new Error(err);
     });
 };
 
@@ -63,6 +63,13 @@ exports.findAll = () => {
 };
 
 exports.suspendStudent = async (req, res) => {
+  if (!req.query) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+    return;
+  }
+
   const email = req.body.student;
   const student = await this.findByEmail(email);
   Student.update(
@@ -77,16 +84,12 @@ exports.suspendStudent = async (req, res) => {
       } else {
         if (num == 0 && student.suspended == true) {
           res.status(204).send(); // affected row = 0 due to same value
-        } else {
-          res.status(400).send({
-            message: "Student email : " + email + " not found",
-          });
         }
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error updating student with email=" + email,
+        message: "Email " + email + " is invalid",
       });
     });
 };

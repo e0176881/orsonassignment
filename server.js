@@ -48,12 +48,25 @@ const run = async () => {
     email: "studentmary@gmail.com",
   });
 
+  const student5 = await StudentController.create({
+    email: "studentbob@gmail.com",
+  });
+  const student6 = await StudentController.create({
+    email: "studentagnes@gmail.com",
+  });
+  const student7 = await StudentController.create({
+    email: "studentmiche@gmail.com",
+  });
+
   await TeacherController.addStudent(teacher1.id, student1.id);
   await TeacherController.addStudent(teacher1.id, student2.id);
   await TeacherController.addStudent(teacher1.id, student3.id);
+  await TeacherController.addStudent(teacher1.id, student5.id);
   await TeacherController.addStudent(teacher2.id, student1.id);
   await TeacherController.addStudent(teacher2.id, student2.id);
   await TeacherController.addStudent(teacher3.id, student4.id);
+  await TeacherController.addStudent(teacher3.id, student6.id);
+  await TeacherController.addStudent(teacher3.id, student7.id);
 };
 
 //db.sequelize.sync();
