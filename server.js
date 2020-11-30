@@ -73,7 +73,9 @@ const run = async () => {
 // // drop the table if it already exists
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
-  run();
+  run().then(() => {
+    app.emit("ready");
+  });
 });
 
 // simple route
@@ -88,3 +90,5 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+module.exports = app;

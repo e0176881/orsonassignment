@@ -42,16 +42,6 @@ exports.findCommonStudents = async (req, res) => {
   });
 };
 
-exports.suspendStudent = async (req, res) => {
-  // Validate request
-  if (!req.body) {
-    res.status(400).send({
-      message: "Content cannot be empty!",
-    });
-    return;
-  }
-};
-
 exports.findCommonStudents = async (req, res) => {
   if (!req.query) {
     res.status(400).send({
@@ -74,12 +64,12 @@ exports.findCommonStudents = async (req, res) => {
       });
       return;
     }
-    console.log(data);
+    //console.log(data);
     for (var k in data.students) {
       //console.log(students[k].email);
       allStudents.push(data.students[k].email);
     }
-    console.log(allStudents);
+    //console.log(allStudents);
   }
   if (objects.length > 1) {
     allStudents = getNonUnique(allStudents); //remove unique students
