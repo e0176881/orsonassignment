@@ -62,9 +62,9 @@ exports.findAll = () => {
     });
 };
 
-exports.suspendStudent = (req, res) => {
+exports.suspendStudent = async (req, res) => {
   const email = req.body.student;
-  console.log(email);
+  const student = await this.findByEmail(email);
   Student.update(
     { suspended: true },
     {
@@ -75,15 +75,42 @@ exports.suspendStudent = (req, res) => {
       if (num == 1) {
         res.status(204).send();
       } else {
-        console.log(num);
-        res.status(400).send({
-          message: "Student email : " + email + " not found",
-        });
+        if (num == 0 && student.suspended == true) {
+          res.status(204).send(); // affected row = 0 due to same value
+        } else {
+          res.status(400).send({
+            message: "Student email : " + email + " not found",
+          });
+        }
       }
     })
     .catch((err) => {
       res.status(500).send({
         message: "Error updating student with email=" + email,
       });
+    });
+};
+
+exports.findByEmail = (email) => {
+  return Student.findOne({
+    where: {
+      email: email,
+    },
+    include: [
+      {
+        model: Teacher,
+        as: "teachers",
+        attributes: ["id", "email"],
+        through: {
+          attributes: [],
+        },
+      },
+    ],
+  })
+    .then((student) => {
+      return student;
+    })
+    .catch((err) => {
+      console.log(">> Error while finding Student: ", err);
     });
 };
