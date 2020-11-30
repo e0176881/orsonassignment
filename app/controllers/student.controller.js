@@ -64,6 +64,7 @@ exports.findAll = () => {
 
 exports.suspendStudent = (req, res) => {
   const email = req.body.student;
+  console.log(email);
   Student.update(
     { suspended: true },
     {
@@ -74,8 +75,9 @@ exports.suspendStudent = (req, res) => {
       if (num == 1) {
         res.status(204).send();
       } else {
+        console.log(num);
         res.status(400).send({
-          message: "Student email : " + email + " not found  ",
+          message: "Student email : " + email + " not found",
         });
       }
     })
