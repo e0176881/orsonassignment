@@ -12,28 +12,41 @@ before(function (done) {
   });
 });
 describe("/GET commonstudents from teacherken", () => {
-  it("should return 4 students", (done) => {
+  it("should return 200,commonstudent1@gmail.com,commonstudent2@gmail.com,student_only_under_teacher_ken@gmail.com,studentbob@gmail.com", (done) => {
     chai
       .request(app)
       .get("/api/commonstudents?teacher=teacherken%40gmail.com")
       .end((err, res) => {
+        let expectedResponse = {
+          students: [
+            "commonstudent1@gmail.com",
+            "commonstudent2@gmail.com",
+            "student_only_under_teacher_ken@gmail.com",
+            "studentbob@gmail.com",
+          ],
+        };
         res.should.have.status(200);
         res.body.students.length.should.be.eql(4);
+        res.body.should.be.eql(expectedResponse);
         done();
       });
   });
 });
 
 describe("/GET commonstudents from teacherken and teacherjoe", () => {
-  it("should return 2 students", (done) => {
+  it("should return 200,commonstudent1@gmail.com,commonstudent2@gmail.com", (done) => {
     chai
       .request(app)
       .get(
         "/api/commonstudents?teacher=teacherken%40gmail.com&teacher=teacherjoe%40gmail.com"
       )
       .end((err, res) => {
+        let expectedResponse = {
+          students: ["commonstudent1@gmail.com", "commonstudent2@gmail.com"],
+        };
         res.should.have.status(200);
         res.body.students.length.should.be.eql(2);
+        res.body.should.be.eql(expectedResponse);
         done();
       });
   });
@@ -107,7 +120,7 @@ describe("/POST Suspend student mary", () => {
 });
 
 describe("/POST Suspend invalid student hahha@gg.com ", () => {
-  it("should return 204", (done) => {
+  it("should return 500", (done) => {
     let request = {
       student: "haha@gg.com",
     };
@@ -123,7 +136,7 @@ describe("/POST Suspend invalid student hahha@gg.com ", () => {
 });
 
 describe("/POST Teacher ken sending notifications to his students and agnes and miche", () => {
-  it("should return 204", (done) => {
+  it("should return 200,commonstudent1@gmail.com,commonstudent2@gmail.com,student_only_under_teacher_ken@gmail.com,studentbob@gmail.com,studentjon@gmail.com,studenthon@gmail.com,studentagnes@gmail.com,studentmiche@gmail.com", (done) => {
     let request = {
       teacher: "teacherken@gmail.com",
       notification:
@@ -134,15 +147,28 @@ describe("/POST Teacher ken sending notifications to his students and agnes and 
       .post("/api/retrievefornotifications")
       .send(request)
       .end((err, res) => {
+        let expectedResponse = {
+          recipients: [
+            "commonstudent1@gmail.com",
+            "commonstudent2@gmail.com",
+            "student_only_under_teacher_ken@gmail.com",
+            "studentbob@gmail.com",
+            "studentjon@gmail.com",
+            "studenthon@gmail.com",
+            "studentagnes@gmail.com",
+            "studentmiche@gmail.com",
+          ],
+        };
         res.should.have.status(200);
         res.body.recipients.length.should.be.eql(8);
+        res.body.should.be.eql(expectedResponse);
         done();
       });
   });
 });
 
 describe("/POST Teacher ken sending notifications to his students only", () => {
-  it("should return 204", (done) => {
+  it("should return 200, commonstudent1@gmail.com,commonstudent2@gmail.com,student_only_under_teacher_ken@gmail.com,studentbob@gmail.com,studentjon@gmail.com,studenthon@gmail.com", (done) => {
     let request = {
       teacher: "teacherken@gmail.com",
       notification: "Hey everybody",
@@ -152,18 +178,29 @@ describe("/POST Teacher ken sending notifications to his students only", () => {
       .post("/api/retrievefornotifications")
       .send(request)
       .end((err, res) => {
+        let expectedResponse = {
+          recipients: [
+            "commonstudent1@gmail.com",
+            "commonstudent2@gmail.com",
+            "student_only_under_teacher_ken@gmail.com",
+            "studentbob@gmail.com",
+            "studentjon@gmail.com",
+            "studenthon@gmail.com",
+          ],
+        };
         res.should.have.status(200);
         res.body.recipients.length.should.be.eql(6);
+        res.body.should.be.eql(expectedResponse);
         done();
       });
   });
 });
 
 describe("/POST Teacher ken sending notifications to his students and mary", () => {
-  it("should return 204", (done) => {
+  it("should return 200, commonstudent1@gmail.com,commonstudent2@gmail.com,student_only_under_teacher_ken@gmail.com,studentbob@gmail.com,studentjon@gmail.com,studenthon@gmail.com", (done) => {
     let request = {
       teacher: "teacherken@gmail.com",
-      notification: "Hey everybody",
+      notification: "Hey everybody @studentmary@.gmail.com",
     };
     chai
       .request(app)

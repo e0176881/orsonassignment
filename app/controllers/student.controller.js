@@ -16,9 +16,9 @@ exports.addStudent = (teacherId, studentId) => {
         }
 
         teacher.addStudent(student);
-        console.log(
-          `>> added Student id=${student.id} to Teacher id=${teacher.id}`
-        );
+        //    console.log(
+        //     `>> added Student id=${student.id} to Teacher id=${teacher.id}`
+        //   );
         return teacher;
       });
     })
@@ -32,11 +32,11 @@ exports.create = (student) => {
     email: student.email,
   })
     .then((student) => {
-      console.log(">> Created Student: " + JSON.stringify(student, null, 4));
+      //  console.log(">> Created Student: " + JSON.stringify(student, null, 4));
       return student;
     })
     .catch((err) => {
-      console.log(">> Error while creating Student: ", err);
+      // console.log(">> Error while creating Student: ", err);
       throw new Error(err);
     });
 };
@@ -92,6 +92,7 @@ exports.suspendStudent = async (req, res) => {
         message: "Email " + email + " is invalid",
       });
     });
+  return;
 };
 
 exports.findByEmail = (email) => {

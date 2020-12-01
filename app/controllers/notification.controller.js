@@ -18,7 +18,7 @@ exports.retrieveNotification = async (req, res) => {
   var students_receiving_notif = [];
   const teacher = await TeacherController.findByEmail(teacher_email);
   const studentList = teacher.students;
-  console.log(JSON.stringify(studentList));
+  //console.log(JSON.stringify(studentList));
   for (var i in studentList) {
     if (studentList[i].suspended == false) {
       students_receiving_notif.push(studentList[i].email);
@@ -41,7 +41,7 @@ exports.retrieveNotification = async (req, res) => {
         }
       } else {
         //TODO : handle invalid email
-        console.log("invalid email");
+        // console.log("invalid email");
         //   res.status(400).send({
         //     message: "mentioned email " + email + " is invalid",
         //   });

@@ -16,7 +16,7 @@ exports.findCommonStudents = async (req, res) => {
     var allStudents = [];
     var teacher_email = Object.values(req.query).toString();
     var teacher_emails = teacher_email.split(",");
-    console.log(teacher_email);
+    //console.log(teacher_email);
     for (var i in teacher_emails) {
       //console.log(object[i]);
       const data = await this.findByEmail(objects[i]);
@@ -25,7 +25,7 @@ exports.findCommonStudents = async (req, res) => {
         //console.log(students[k].email);
         allStudents.push(data.students[k].email);
       }
-      console.log(allStudents);
+      //  console.log(allStudents);
     }
 
     if (objects.length > 1) {
@@ -36,6 +36,7 @@ exports.findCommonStudents = async (req, res) => {
     var commonStudents = allStudents.filter(removeDuplicate);
   } catch (err) {
     res.status(500).send({ message: err.message });
+    return;
   }
   res.status(200).send({
     students: commonStudents,
@@ -53,9 +54,9 @@ exports.findCommonStudents = async (req, res) => {
   var allStudents = [];
   var object = Object.values(req.query).toString();
   var objects = object.split(",");
-  console.log(object);
+  //console.log(object);
   for (var i in objects) {
-    console.log(object[i]);
+    // console.log(object[i]);
     const data = await this.findByEmail(objects[i]);
     //check if teacher email exist
     if (!data) {
@@ -138,6 +139,7 @@ exports.createStudentAPI = async (req, res) => {
     res.status(400).send({
       message: message,
     });
+    return;
   }
   res.status(204).send();
 };
@@ -147,7 +149,7 @@ exports.create = (teacher) => {
     email: teacher.email,
   })
     .then((teacher) => {
-      console.log(">> Created Teacher: " + JSON.stringify(teacher, null, 2));
+      // console.log(">> Created Teacher: " + JSON.stringify(teacher, null, 2));
       return teacher;
     })
     .catch((err) => {
@@ -235,15 +237,15 @@ exports.addStudent = (teacherId, studentId) => {
         }
 
         teacher.addStudent(student);
-        console.log(
-          `>> added Student id=${student.id} to Teacher id=${teacher.id}`
-        );
+        //  console.log(
+        //    `>> added Student id=${student.id} to Teacher id=${teacher.id}`
+        //   );
         return teacher;
       });
     })
     .catch((err) => {
       //  throw err;
-      console.log(">> Error while adding Student to Teacher: ", err);
+      //   console.log(">> Error while adding Student to Teacher: ", err);
     });
 };
 
