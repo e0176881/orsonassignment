@@ -4,7 +4,7 @@
   "description": "govtech assignment",
   "main": "server.js",
   "scripts": {
-     "test": "mocha --timeout 10000"
+     "test": "mocha --timeout 40000"
   },
   "author": "orson",
   "license": "ISC",
