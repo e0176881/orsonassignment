@@ -23,33 +23,63 @@ git clone https://github.com/e0176881/orsonassignment
 cd ${path-to-project}
 npm install
 ```
-5. MySQL DB Information
-Databae is hosted on AWS RDS. Hence local MySQL Server is optional. 
-DB information can be found at app/config/db.config.js
+3. MySQL DB Information (Local MySQL Server is optional) : 
 
+DB is hosted on AWS RDS. DB server information can be found at app/config/db.config.js
+
+```
 DB Login Information : 
 Host : database-govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com
 Username : admin
 Password : 11111111
 DB Name : testdb
+```
 
 ```bash
 mysql -u admin -p11111111 -h database-govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com testdb 
 ```
 
-8. Start the server & drop tables and intitialise data:
+4. Start the server(drop table if exist + intitialise data):
 
 ```bash
 npm start
 ```
+### Initialised Data
+(students are all not suspended by default)
 
-9. Check that the development server is running by sending a GET request to `127.0.0.1:3000` where `3000` is the default port.
+| Teacher                       | Student(s)                                                      
+| :---------------------------- | :---------------------------------------------------------------------------------------------------------------
+| teacherken@gmail.com          | commonstudent1@gmail.com,commonstudent2@gmail.com,student_only_under_teacher_ken@gmail.com, studentbob@gmail.com                               
+| teacherjoe@gmail.com          | commonstudent1@gmail.com,commonstudent2@gmail.com                   
+| teacherpam@gmail.com          | studentmary@gmail.com,studentagnes@gmail.com,studentmiche@gmail.com           
+
+
+
+
+5. Check that the development server is running by sending a GET request to `127.0.0.1:3000` where `3000` is the default port.
 
 ```json
 {
   "message": "Welcome"
 }
 ```
+
+### Test Cases Available
+
+
+| Method | Route                         | Description                                                       
+| :----- | :---------------------------- | :---------------------------------------------------------------- 
+| GET    | /api/commonstudents           | commonstudents from teacherken                                   
+| GET    | /api/commonstudents           | commonstudents from teacherken and teacherjoe                    
+| POST   | /api/register                 | Teacher Ken wants to register studentjon and studenthon           
+| GET    | /api/register                 | Teacher Ken wants to register studentjon and studenthon again 
+| POST   | /api/register                 | Teacher Ken wants to register student with invalid email format  
+| POST   | /api/suspend | Suspend student mary  
+| POST   | /api/suspend | Suspend invalid student hahha@gg.com  
+| POST   | /api/retrievefornotifications| Teacher Ken sending notifications to his students and agnes and miche 
+| POST   | /api/retrievefornotifications| Teacher Ken sending notifications to his students only  
+| POST   | /api/retrievefornotifications| Teacher Ken sending notifications to his students and mary  
+
 
 ## Running unit test
 
@@ -74,14 +104,15 @@ npm run test
 
 | Method | Route            | Description                                         |
 | :----- | :--------------- | :-------------------------------------------------- |
-| GET    | /api/student     | Retrieve all students                               |
+| GET    | /api/students     | Retrieve all students                               |
+| DELETE    | /api/deleteStudent/id     | Delete student by ID                             |
 
 
 ### Utility routes - Teacher
 
 | Method | Route            | Description                                         |
 | :----- | :--------------- | :-------------------------------------------------- |
-| GET    | /api/teacher     | Retrieve all teachers                               |
+| GET    | /api/teachers     | Retrieve all teachers                               |
 
 
 ## Deployment / Server environment
