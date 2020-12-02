@@ -44,7 +44,7 @@ mysql -u admin -p11111111 -h database-govtech.clb6lncxxr3e.us-east-1.rds.amazona
 ```bash
 npm start
 ```
-### Initialised Data
+```### Initialised Data
 (students are all not suspended by default)
 
 | Teacher                         | Student(s)                                                      
@@ -52,7 +52,7 @@ npm start
 | teacherken@gmail.com          | commonstudent1@gmail.com,commonstudent2@gmail.com,student_only_under_teacher_ken@gmail.com, studentbob@gmail.com                               
 | teacherjoe@gmail.com           | commonstudent1@gmail.com,commonstudent2@gmail.com                   
 | teacherpam@gmail.com                | studentmary@gmail.com,studentagnes@gmail.com,studentmiche@gmail.com           
-
+```
 
 
 
@@ -76,9 +76,9 @@ npm start
 | POST   | /api/register                 | Teacher Ken wants to register student with invalid email format  
 | POST   | /api/suspend | Suspend student mary  
 | POST   | /api/suspend | Suspend invalid student hahha@gg.com  
-| POST   | /api/retrievefornotifications| Teacher ken sending notifications to his students and agnes and miche 
-| POST   | /api/retrievefornotifications| Teacher ken sending notifications to his students only  
-| POST   | /api/retrievefornotifications| Teacher ken sending notifications to his students and mary  
+| POST   | /api/retrievefornotifications| Teacher Ken sending notifications to his students and agnes and miche 
+| POST   | /api/retrievefornotifications| Teacher Ken sending notifications to his students only  
+| POST   | /api/retrievefornotifications| Teacher Ken sending notifications to his students and mary  
 
 
 ## Running unit test
