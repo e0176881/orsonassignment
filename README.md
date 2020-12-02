@@ -25,20 +25,12 @@ npm install
 ```
 3. MySQL DB Information (Local MySQL Server is optional) : 
 
-DB is hosted on AWS RDS. DB server information can be found at app/config/db.config.js
+DB server is hosted on AWS RDS. 
 
 ```
-DB Login Information : 
-Host : govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com
-Username : admin
-Password : 11111111
-DB Name : testdb
+DB Server Information : 
+app/config/db.config.js
 ```
-
-```bash
-mysql -u admin -p11111111 -h govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com testdb 
-```
-
 4. Start the server(drop table if exist + intitialise data):
 
 ```bash
