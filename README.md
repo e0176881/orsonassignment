@@ -23,11 +23,11 @@ git clone https://github.com/e0176881/orsonassignment
 cd ${path-to-project}
 npm install
 ```
-3. MySQL DB Information
-Databae is hosted on AWS RDS. Hence local MySQL Server is optional. 
-DB information can be found at app/config/db.config.js
+3. MySQL DB Information : 
 
 ```
+Database is hosted on AWS RDS. Hence local MySQL Server is optional. 
+DB information can be found at app/config/db.config.js
 DB Login Information : 
 Host : database-govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com
 Username : admin
