@@ -86,7 +86,7 @@ npm start
 Run the following command in the project directory to run unit test:
 
 ```bash
-npm run test
+npm test
 ```
 
 ## Routes
