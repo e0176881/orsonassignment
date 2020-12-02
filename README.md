@@ -104,14 +104,15 @@ npm run test
 
 | Method | Route            | Description                                         |
 | :----- | :--------------- | :-------------------------------------------------- |
-| GET    | /api/student     | Retrieve all students                               |
+| GET    | /api/students     | Retrieve all students                               |
+| DELETE    | /api/deleteStudent/id     | Delete student by ID                             |
 
 
 ### Utility routes - Teacher
 
 | Method | Route            | Description                                         |
 | :----- | :--------------- | :-------------------------------------------------- |
-| GET    | /api/teacher     | Retrieve all teachers                               |
+| GET    | /api/teachers     | Retrieve all teachers                               |
 
 
 ## Deployment / Server environment
