@@ -39,12 +39,12 @@ DB Name : testdb
 mysql -u admin -p11111111 -h database-govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com testdb 
 ```
 
-4. Start the server & drop tables and intitialise data:
+4. Start the server(drop table if exist + intitialise data):
 
 ```bash
 npm start
 ```
-```### Initialised Data
+### Initialised Data
 (students are all not suspended by default)
 
 | Teacher                       | Student(s)                                                      
@@ -52,7 +52,7 @@ npm start
 | teacherken@gmail.com          | commonstudent1@gmail.com,commonstudent2@gmail.com,student_only_under_teacher_ken@gmail.com, studentbob@gmail.com                               
 | teacherjoe@gmail.com          | commonstudent1@gmail.com,commonstudent2@gmail.com                   
 | teacherpam@gmail.com          | studentmary@gmail.com,studentagnes@gmail.com,studentmiche@gmail.com           
-```
+
 
 
 
