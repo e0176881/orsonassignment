@@ -25,7 +25,7 @@ npm install
 ```
 3. MySQL DB Information (Local MySQL Server is optional) : 
 
-DB server is hosted on AWS RDS. 
+DB server is hosted using AWS RDS (MySQL). 
 
 ```
 DB Server Information : 
