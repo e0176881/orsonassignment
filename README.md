@@ -44,6 +44,17 @@ mysql -u admin -p11111111 -h database-govtech.clb6lncxxr3e.us-east-1.rds.amazona
 ```bash
 npm start
 ```
+### Initialised Data
+(students are all not suspended by default)
+
+| Teacher                         | Student(s)                                                      
+| :---------------------------- | :---------------------------------------------------------------------------------------------------------------
+| teacherken@gmail.com          | commonstudent1@gmail.com,commonstudent2@gmail.com,student_only_under_teacher_ken@gmail.com, studentbob@gmail.com                               
+| teacherjoe@gmail.com           | commonstudent1@gmail.com,commonstudent2@gmail.com                   
+| teacherpam@gmail.com                | studentmary@gmail.com,studentagnes@gmail.com,studentmiche@gmail.com           
+
+
+
 
 5. Check that the development server is running by sending a GET request to `127.0.0.1:3000` where `3000` is the default port.
 
