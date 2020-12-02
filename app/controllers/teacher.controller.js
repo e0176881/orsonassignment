@@ -5,7 +5,7 @@ const Teacher = db.teacher;
 const StudentController = require("./student.controller");
 
 exports.findCommonStudents = async (req, res) => {
-  if (!req.query) {
+  if (Object.keys(req.query).length === 0) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -19,7 +19,7 @@ exports.findCommonStudents = async (req, res) => {
     //console.log(teacher_email);
     for (var i in teacher_emails) {
       //console.log(object[i]);
-      const data = await this.findByEmail(objects[i]);
+      const data = await this.findByEmail(teacher_emails[i]);
       //console.log(data);
       for (var k in data.students) {
         //console.log(students[k].email);
@@ -28,7 +28,7 @@ exports.findCommonStudents = async (req, res) => {
       //  console.log(allStudents);
     }
 
-    if (objects.length > 1) {
+    if (teacher_emails.length > 1) {
       allStudents = getNonUnique(allStudents); //remove unique students
 
       //remove duplicate students
@@ -38,47 +38,6 @@ exports.findCommonStudents = async (req, res) => {
     res.status(500).send({ message: err.message });
     return;
   }
-  res.status(200).send({
-    students: commonStudents,
-  });
-};
-
-exports.findCommonStudents = async (req, res) => {
-  if (!req.query) {
-    res.status(400).send({
-      message: "Content cannot be empty!",
-    });
-    return;
-  }
-
-  var allStudents = [];
-  var object = Object.values(req.query).toString();
-  var objects = object.split(",");
-  //console.log(object);
-  for (var i in objects) {
-    // console.log(object[i]);
-    const data = await this.findByEmail(objects[i]);
-    //check if teacher email exist
-    if (!data) {
-      res.status(400).send({
-        message: "Teacher email does not exist",
-      });
-      return;
-    }
-    //console.log(data);
-    for (var k in data.students) {
-      //console.log(students[k].email);
-      allStudents.push(data.students[k].email);
-    }
-    //console.log(allStudents);
-  }
-  if (objects.length > 1) {
-    allStudents = getNonUnique(allStudents); //remove unique students
-    //console.log(nonUniqueStudents);
-    //remove duplicate students
-  }
-  var commonStudents = allStudents.filter(removeDuplicate);
-
   res.status(200).send({
     students: commonStudents,
   });
@@ -95,7 +54,7 @@ function removeDuplicate(value, index, self) {
 
 exports.createStudentAPI = async (req, res) => {
   // Validate request
-  if (!req.body) {
+  if (Object.keys(req.body).length === 0) {
     res.status(400).send({
       message: "Content cannot be empty!",
     });
@@ -257,6 +216,15 @@ exports.findTeacher = (email) => {
     .catch((err) => {
       console.log(">> Error while finding Teacher: ", err);
     });
+};
+
+exports.allTeachers = async (req, res) => {
+  try {
+    const teachers = await this.findAll();
+    res.status(200).send(teachers);
+  } catch (err) {
+    res.status(400).send({ message: "an error occured" });
+  }
 };
 
 function validateEmail(email) {

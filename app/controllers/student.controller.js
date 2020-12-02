@@ -62,8 +62,17 @@ exports.findAll = () => {
     });
 };
 
+exports.allStudents = async (req, res) => {
+  try {
+    const students = await this.findAll();
+    res.status(200).send(students);
+  } catch (err) {
+    res.status(400).send({ message: "an error occured" });
+  }
+};
+
 exports.suspendStudent = async (req, res) => {
-  if (!req.query) {
+  if (Object.keys(req.body).length === 0) {
     res.status(400).send({
       message: "Content cannot be empty!",
     });
@@ -73,7 +82,7 @@ exports.suspendStudent = async (req, res) => {
   const email = req.body.student;
   const student = await this.findByEmail(email);
   Student.update(
-    { suspended: true },
+    { suspended: 1 },
     {
       where: { email: email },
     }
@@ -116,5 +125,34 @@ exports.findByEmail = (email) => {
     })
     .catch((err) => {
       console.log(">> Error while finding Student: ", err);
+    });
+};
+
+exports.deleteStudent = (req, res) => {
+  if (!req.params) {
+    res.status(400).send({
+      message: "Content cannot be empty!",
+    });
+    return;
+  }
+  const id = req.params.id;
+  Student.destroy({
+    where: {
+      id: id,
+    },
+  })
+    .then((row) => {
+      if (row === 1) {
+        res.status(204).send({
+          message: "user deleted",
+        });
+      } else {
+        res.status(400).send({
+          message: "cannot delete user",
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(">> Error while deleting Student: ", err);
     });
 };

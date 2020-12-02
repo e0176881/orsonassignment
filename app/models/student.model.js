@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
     suspended: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
-      defaultValue: false,
+      defaultValue: 0,
     },
   });
 

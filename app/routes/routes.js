@@ -11,6 +11,12 @@ module.exports = (app) => {
 
   router.get("/commonstudents", teacher.findCommonStudents);
 
+  router.get("/students", student.allStudents);
+
+  router.get("/teachers", teacher.allTeachers);
+
+  router.delete("/deleteStudent/:id", student.deleteStudent);
+
   router.post("/retrievefornotifications", notification.retrieveNotification);
 
   app.use("/api", router);

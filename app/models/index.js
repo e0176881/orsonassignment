@@ -4,7 +4,6 @@ const Sequelize = require("sequelize");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
-  operatorsAliases: false,
 
   pool: {
     max: dbConfig.pool.max,
@@ -30,11 +29,13 @@ db.teacher.belongsToMany(db.student, {
   through: "student_teacher",
   as: "students",
   foreignKey: "teacher_id",
+  onDelete: "CASCADE",
 });
 db.student.belongsToMany(db.teacher, {
   through: "student_teacher",
   as: "teachers",
   foreignKey: "student_id",
+  onDelete: "CASCADE",
 });
 
 module.exports = db;
