@@ -47,11 +47,11 @@ npm start
 ```### Initialised Data
 (students are all not suspended by default)
 
-| Teacher                         | Student(s)                                                      
+| Teacher                       | Student(s)                                                      
 | :---------------------------- | :---------------------------------------------------------------------------------------------------------------
 | teacherken@gmail.com          | commonstudent1@gmail.com,commonstudent2@gmail.com,student_only_under_teacher_ken@gmail.com, studentbob@gmail.com                               
-| teacherjoe@gmail.com           | commonstudent1@gmail.com,commonstudent2@gmail.com                   
-| teacherpam@gmail.com                | studentmary@gmail.com,studentagnes@gmail.com,studentmiche@gmail.com           
+| teacherjoe@gmail.com          | commonstudent1@gmail.com,commonstudent2@gmail.com                   
+| teacherpam@gmail.com          | studentmary@gmail.com,studentagnes@gmail.com,studentmiche@gmail.com           
 ```
 
 
