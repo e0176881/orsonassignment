@@ -1,5 +1,5 @@
 module.exports = {
-  HOST: "database-govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com",
+  HOST: "govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com",
   USER: "admin",
   PASSWORD: "11111111",
   DB: "testdb",
