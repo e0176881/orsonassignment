@@ -29,7 +29,7 @@ DB is hosted on AWS RDS. DB server information can be found at app/config/db.con
 
 ```
 DB Login Information : 
-Host : database-govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com
+Host : govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com
 Username : admin
 Password : 11111111
 DB Name : testdb
