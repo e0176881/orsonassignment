@@ -23,27 +23,29 @@ git clone https://github.com/e0176881/orsonassignment
 cd ${path-to-project}
 npm install
 ```
-5. MySQL DB Information
+3. MySQL DB Information
 Databae is hosted on AWS RDS. Hence local MySQL Server is optional. 
 DB information can be found at app/config/db.config.js
 
+```
 DB Login Information : 
 Host : database-govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com
 Username : admin
 Password : 11111111
 DB Name : testdb
+```
 
 ```bash
 mysql -u admin -p11111111 -h database-govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com testdb 
 ```
 
-8. Start the server & drop tables and intitialise data:
+4. Start the server & drop tables and intitialise data:
 
 ```bash
 npm start
 ```
 
-9. Check that the development server is running by sending a GET request to `127.0.0.1:3000` where `3000` is the default port.
+5. Check that the development server is running by sending a GET request to `127.0.0.1:3000` where `3000` is the default port.
 
 ```json
 {
