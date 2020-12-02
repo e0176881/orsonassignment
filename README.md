@@ -36,7 +36,7 @@ DB Name : testdb
 ```
 
 ```bash
-mysql -u admin -p11111111 -h database-govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com testdb 
+mysql -u admin -p11111111 -h govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com testdb 
 ```
 
 4. Start the server(drop table if exist + intitialise data):
