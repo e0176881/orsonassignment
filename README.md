@@ -55,6 +55,10 @@ npm start
   "message": "Welcome"
 }
 ```
+## Live Server
+This API is also hosted on AWS ELASTIC BEANSTALK with AWS CodePipeline using Github
+http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/
+
 
 ### Test Cases Available
 
@@ -105,12 +109,6 @@ npm test
 | Method | Route            | Description                                         |
 | :----- | :--------------- | :-------------------------------------------------- |
 | GET    | /api/teachers     | Retrieve all teachers                               |
-
-
-## Deployment / Server environment
-This API is hosted on AWS ELASTIC BEANSTALK with AWS CodePipeline using Github
-http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/
-
 
 ## Built with
 
