@@ -56,18 +56,18 @@ npm start
 ### Test Cases
 
 
-| Method | Route                         | Description                                                       | Expected Result|Actual Result|
-| :----- | :---------------------------- | :---------------------------------------------------------------- |:---------------|:---------------|
-| GET    | /api/commonstudents           | commonstudents from teacherken                                    |status 200,commonstudent1@gmail.com,commonstudent2@gmail.com,student_only_under_teacher_ken@gmail.com,studentbob@gmail.com |            same |
-| GET    | /api/commonstudents           | commonstudents from teacherken and teacherjoe                     |status 200,commonstudent1@gmail.com,commonstudent2@gmail.com|
-| POST   | /api/register                 | Teacher Ken wants to register studentjon and studenthon           | status 204 | same
-| GET    | /api/register                 | Teacher Ken wants to register studentjon and studenthon again | status 400 | same
-| POST   | /api/register                 | Teacher Ken wants to register student with invalid email format  | status 400 | same
-| POST   | /api/suspend | Suspend student mary  | status 204 | same
-| POST   | /api/suspend | Suspend invalid student hahha@gg.com  |status 500 | same
-| POST   | /api/retrievefornotifications| Teacher ken sending notifications to his students and agnes and miche  |status 200,commonstudent1@gmail.com,commonstudent2@gmail.com,student_only_under_teacher_ken@gmail.com,studentbob@gmail.com,studentjon@gmail.com,studenthon@gmail.com,studentagnes@gmail.com,studentmiche@gmail.com | same
-| POST   | /api/retrievefornotifications| Teacher ken sending notifications to his students only  |status 200 commonstudent1@gmail.com,commonstudent2@gmail.com,student_only_under_teacher_ken@gmail.com,studentbob@gmail.com,studentjon@gmail.com,studenthon@gmail.com|same
-| POST   | /api/retrievefornotifications| Teacher ken sending notifications to his students and mary  |status 200 commonstudent1@gmail.com,commonstudent2@gmail.com,student_only_under_teacher_ken@gmail.com,studentbob@gmail.com,studentjon@gmail.com,studenthon@gmail.com|same
+| Method | Route                         | Description                                                       
+| :----- | :---------------------------- | :---------------------------------------------------------------- 
+| GET    | /api/commonstudents           | commonstudents from teacherken                                   
+| GET    | /api/commonstudents           | commonstudents from teacherken and teacherjoe                    
+| POST   | /api/register                 | Teacher Ken wants to register studentjon and studenthon           
+| GET    | /api/register                 | Teacher Ken wants to register studentjon and studenthon again 
+| POST   | /api/register                 | Teacher Ken wants to register student with invalid email format  
+| POST   | /api/suspend | Suspend student mary  
+| POST   | /api/suspend | Suspend invalid student hahha@gg.com  
+| POST   | /api/retrievefornotifications| Teacher ken sending notifications to his students and agnes and miche 
+| POST   | /api/retrievefornotifications| Teacher ken sending notifications to his students only  
+| POST   | /api/retrievefornotifications| Teacher ken sending notifications to his students and mary  
 
 
 ## Running unit test
