@@ -5,7 +5,7 @@ const Teacher = db.teacher;
 const StudentController = require("./student.controller");
 const TeacherController = require("./teacher.controller");
 exports.retrieveNotification = async (req, res) => {
-  if (!req.query) {
+  if (Object.keys(req.body).length === 0) {
     res.status(400).send({
       message: "Content can not be empty!",
     });
@@ -17,6 +17,12 @@ exports.retrieveNotification = async (req, res) => {
 
   var students_receiving_notif = [];
   const teacher = await TeacherController.findByEmail(teacher_email);
+  if (!teacher) {
+    res.status(400).send({
+      message: "Teacher dont exist",
+    });
+    return;
+  }
   const studentList = teacher.students;
   //console.log(JSON.stringify(studentList));
   for (var i in studentList) {
@@ -33,10 +39,7 @@ exports.retrieveNotification = async (req, res) => {
       var mentioned_student = await StudentController.findByEmail(email);
       if (mentioned_student) {
         // console.log(mentioned_student);
-        if (
-          !students_receiving_notif.includes(mentioned_student) &&
-          mentioned_student.suspended == false
-        ) {
+        if (mentioned_student.suspended == false) {
           students_receiving_notif.push(mentioned_student.email);
         }
       } else {
@@ -46,8 +49,14 @@ exports.retrieveNotification = async (req, res) => {
         //     message: "mentioned email " + email + " is invalid",
         //   });
       }
+      students_receiving_notif = students_receiving_notif.filter(
+        removeDuplicate
+      ); // remove duplicates
     }
   }
 
   res.status(200).send({ recipients: students_receiving_notif });
 };
+function removeDuplicate(value, index, self) {
+  return self.indexOf(value) === index;
+}
