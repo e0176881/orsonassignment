@@ -27,6 +27,26 @@ exports.addStudent = (teacherId, studentId) => {
     });
 };
 
+/*exports.createStudent = async (req, res) => {
+  if (Object.keys(req.body).length === 0) {
+    res.status(400).send({
+      message: "Content cannot be empty!",
+    });
+    return;
+  }
+  try {
+    const student = await this.create({ email: req.body.student });
+    if (!student) {
+      res.status(400).send({ message: "student cannot be created" });
+      return;
+    }
+    res.status(204).send();
+  } catch (err) {
+    res.status(400).send({ message: err.message });
+    return;
+  }
+}; */
+
 exports.create = (student) => {
   return Student.create({
     email: student.email,

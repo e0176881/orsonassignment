@@ -15,6 +15,8 @@ module.exports = (app) => {
 
   router.get("/teachers", teacher.allTeachers);
 
+  //router.post("/createStudent", student.createStudent);
+
   router.delete("/deleteStudent/:id", student.deleteStudent);
 
   router.post("/retrievefornotifications", notification.retrieveNotification);
