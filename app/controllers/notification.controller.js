@@ -39,7 +39,10 @@ exports.retrieveNotification = async (req, res) => {
       var mentioned_student = await StudentController.findByEmail(email);
       if (mentioned_student) {
         // console.log(mentioned_student);
-        if (mentioned_student.suspended == false) {
+        if (
+          /*!students_receiving_notif.includes(mentioned_student) && */
+          mentioned_student.suspended == false
+        ) {
           students_receiving_notif.push(mentioned_student.email);
         }
       } else {
