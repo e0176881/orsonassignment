@@ -48,7 +48,7 @@ npm start
 
 
 
-5. Check that the development server is running by sending a GET request to `127.0.0.1:3000` where `3000` is the default port.
+5. Check that the development server is running by sending a GET request to `127.0.0.1:8080` where `8080` is the default port.
 
 ```json
 {
@@ -58,7 +58,6 @@ npm start
 ## Live Server
 This API is also hosted on AWS ELASTIC BEANSTALK with AWS CodePipeline using Github
 http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/
-
 
 ### Test Cases Available
 
@@ -82,15 +81,17 @@ http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/
 
 ## Running unit test
 
-Run the following command in the project directory to run unit test:
+Run the following command in the project directory to run unit test (Stop npm start if you intend to run unit test!):
 
 ```bash
-npm test
+npm test 
 ```
 
 ## Routes
 
-### Main API routes
+http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/api/Route | http://localhost:8080/api/Route
+
+### Main API routes 
 
 | Method | Route                         | Description                                                       |
 | :----- | :---------------------------- | :---------------------------------------------------------------- |
