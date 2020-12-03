@@ -25,20 +25,12 @@ npm install
 ```
 3. MySQL DB Information (Local MySQL Server is optional) : 
 
-DB is hosted on AWS RDS. DB server information can be found at app/config/db.config.js
+DB server is hosted using AWS RDS (MySQL). 
 
 ```
-DB Login Information : 
-Host : govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com
-Username : admin
-Password : 11111111
-DB Name : testdb
+DB Server Information : 
+app/config/db.config.js
 ```
-
-```bash
-mysql -u admin -p11111111 -h govtech.clb6lncxxr3e.us-east-1.rds.amazonaws.com testdb 
-```
-
 4. Start the server(drop table if exist + intitialise data):
 
 ```bash
@@ -63,6 +55,10 @@ npm start
   "message": "Welcome"
 }
 ```
+## Live Server
+This API is also hosted on AWS ELASTIC BEANSTALK with AWS CodePipeline using Github
+http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/
+
 
 ### Test Cases Available
 
@@ -86,7 +82,7 @@ npm start
 Run the following command in the project directory to run unit test:
 
 ```bash
-npm run test
+npm test
 ```
 
 ## Routes
@@ -113,12 +109,6 @@ npm run test
 | Method | Route            | Description                                         |
 | :----- | :--------------- | :-------------------------------------------------- |
 | GET    | /api/teachers     | Retrieve all teachers                               |
-
-
-## Deployment / Server environment
-This API is hosted on AWS ELASTIC BEANSTALK with AWS CodePipeline using Github
-http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/
-
 
 ## Built with
 
