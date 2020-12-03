@@ -52,6 +52,22 @@ describe("/GET commonstudents from teacherken and teacherjoe", () => {
   });
 });
 
+describe("/GET commonstudents from a teacher that does not exist", () => {
+  it("should return 400, teacher dont exist", (done) => {
+    chai
+      .request(app)
+      .get("/api/commonstudents?teacher=dontexist%40gmail.com")
+      .end((err, res) => {
+        let expectedResponse = {
+          message: "Teacher dont exist",
+        };
+        res.should.have.status(400);
+        res.body.should.be.eql(expectedResponse);
+        done();
+      });
+  });
+});
+
 describe("/POST Teacher Ken wants to register studentjon and studenthon", () => {
   it("should return 204", (done) => {
     let request = {
@@ -98,6 +114,27 @@ describe("/POST Teacher Ken wants to register student with invalid email format"
       .send(request)
       .end((err, res) => {
         res.should.have.status(400);
+        done();
+      });
+  });
+});
+
+describe("/POST Invalid Teacher wants to register studentray", () => {
+  it("should return 400, Teacher dont exist", (done) => {
+    let request = {
+      teacher: "invalidteacher@gmail.com",
+      students: ["studentray@gmail.com"],
+    };
+    chai
+      .request(app)
+      .post("/api/register")
+      .send(request)
+      .end((err, res) => {
+        let expectedResponse = {
+          message: "Teacher dont exist",
+        };
+        res.should.have.status(400);
+        res.body.should.be.eql(expectedResponse);
         done();
       });
   });
