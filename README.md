@@ -28,7 +28,7 @@ npm install
 DB server is hosted using AWS RDS (MySQL). 
 
 ```
-DB Server Information : 
+DB Server Information (amend if you want to test with local MySQL Server) : 
 app/config/db.config.js
 ```
 4. Start the server(drop table if exist + intitialise data):
@@ -48,7 +48,7 @@ npm start
 
 
 
-5. Check that the development server is running by sending a GET request to `127.0.0.1:3000` where `3000` is the default port.
+5. Check that the development server is running by sending a GET request to `127.0.0.1:8080` where `8080` is the default port.
 
 ```json
 {
@@ -59,6 +59,8 @@ npm start
 This API is also hosted on AWS ELASTIC BEANSTALK with AWS CodePipeline using Github
 http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/
 
+As both localhost and AWS Elastic Beanstalk server are connecting to AWS RDS database server,
+it is recommended to reset the database by running "npm start" 
 
 ### Test Cases Available
 
@@ -82,15 +84,17 @@ http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/
 
 ## Running unit test
 
-Run the following command in the project directory to run unit test:
+Run the following command in the project directory to run unit test (Stop npm start if you intend to run unit test!):
 
 ```bash
-npm test
+npm test 
 ```
 
 ## Routes
 
-### Main API routes
+http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/api/ | http://localhost:8080/api/ 
+
+### Main API routes 
 
 | Method | Route                         | Description                                                       |
 | :----- | :---------------------------- | :---------------------------------------------------------------- |
