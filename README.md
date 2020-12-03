@@ -59,6 +59,9 @@ npm start
 This API is also hosted on AWS ELASTIC BEANSTALK with AWS CodePipeline using Github
 http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/
 
+As both localhost and AWS Elastic Beanstalk server are connecting to AWS RDS database server,
+it is recommended to reset the database by running "npm start" 
+
 ### Test Cases Available
 
 
@@ -89,7 +92,7 @@ npm test
 
 ## Routes
 
-http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/api/Route | http://localhost:8080/api/Route
+http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/api/ | http://localhost:8080/api/ 
 
 ### Main API routes 
 
