@@ -32,6 +32,7 @@ DB Server Information (amend if you want to test with local MySQL Server) :
 app/config/db.config.js
 ```
 4. Start the server(drop table if exist + intitialise data):
+Note : it takes awhile to init the data as it's a free tier account
 
 ```bash
 npm start
