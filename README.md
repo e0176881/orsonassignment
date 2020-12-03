@@ -75,6 +75,7 @@ http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/
 | POST   | /api/retrievefornotifications| Teacher Ken sending notifications to his students and agnes and miche 
 | POST   | /api/retrievefornotifications| Teacher Ken sending notifications to his students only  
 | POST   | /api/retrievefornotifications| Teacher Ken sending notifications to his students and mary  
+| POST   | /api/retrievefornotifications| Teacher Ken sending notifications to his students and mentioning repeated students  
 
 
 ## Running unit test
