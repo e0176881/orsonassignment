@@ -66,10 +66,12 @@ http://orsongovtech-env.eba-ecmcmpip.us-east-1.elasticbeanstalk.com/
 | Method | Route                         | Description                                                       
 | :----- | :---------------------------- | :---------------------------------------------------------------- 
 | GET    | /api/commonstudents           | commonstudents from teacherken                                   
-| GET    | /api/commonstudents           | commonstudents from teacherken and teacherjoe                    
+| GET    | /api/commonstudents           | commonstudents from teacherken and teacherjoe  
+| POST   | /api/commonstudents           | commonstudents from a teacher that does not exist 
 | POST   | /api/register                 | Teacher Ken wants to register studentjon and studenthon           
 | GET    | /api/register                 | Teacher Ken wants to register studentjon and studenthon again 
-| POST   | /api/register                 | Teacher Ken wants to register student with invalid email format  
+| POST   | /api/register                 | Teacher Ken wants to register student with invalid email format 
+| POST   | /api/register                 | Invalid Teacher wants to register studentray 
 | POST   | /api/suspend | Suspend student mary  
 | POST   | /api/suspend | Suspend invalid student hahha@gg.com  
 | POST   | /api/retrievefornotifications| Teacher Ken sending notifications to his students and agnes and miche 
