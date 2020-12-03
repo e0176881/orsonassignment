@@ -20,6 +20,12 @@ exports.findCommonStudents = async (req, res) => {
     for (var i in teacher_emails) {
       //console.log(object[i]);
       const data = await this.findByEmail(teacher_emails[i]);
+      if (!data) {
+        res.status(400).send({
+          message: "Teacher dont exist",
+        });
+        return;
+      }
       //console.log(data);
       for (var k in data.students) {
         //console.log(students[k].email);
@@ -63,6 +69,12 @@ exports.createStudentAPI = async (req, res) => {
 
   try {
     const teacherData = await this.findTeacher(req.body.teacher);
+    if (!teacherData) {
+      res.status(400).send({
+        message: "Teacher dont exist",
+      });
+      return;
+    }
 
     for (var s in req.body.students) {
       const student = {

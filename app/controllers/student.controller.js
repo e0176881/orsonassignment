@@ -92,7 +92,7 @@ exports.suspendStudent = async (req, res) => {
         res.status(204).send();
       } else {
         if (num == 0 && student.suspended == true) {
-          res.status(204).send(); // affected row = 0 due to same value
+          res.status(200).send({ message: "student is already suspended" }); // affected row = 0 due to same value
         }
       }
     })
